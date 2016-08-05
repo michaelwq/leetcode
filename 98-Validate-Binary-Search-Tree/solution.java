@@ -28,16 +28,17 @@ public class Solution {
                 return parent + 1;
             }
         }
-        int left = root.val - 1;
-        int right = root.val + 1;
-        if (root.left != null){
-            left = getVal(root.left, root.val);
+        if (root.val == parent){
+            retuen parent;
         }
-        if (root.right != null){
-            right = getVal(root.right, root.val);
-        }
+        int left = getVal(root.left, true, root.val);
+        int right = getVal(root.right, false, root.val);
         if( left < root.val && right > root.val){
-            return left;
+            if (isLeft){
+                return left;
+            }else{
+                return right;
+            }
         }else{
             return parent;
         }
