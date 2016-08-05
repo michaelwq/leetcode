@@ -8,39 +8,23 @@
  * }
  */
 public class Solution {
+    private int lastVal = Integer.MIN_VALUE;
+    private boolean firstNode = true;
     public boolean isValidBST(TreeNode root) {
-        if (root == null){
+        if (root == null) {
             return true;
         }
-        int left = getVal(root.left, true, root.val);
-        int right = getVal(root.right, false, root.val);
-        if( left < root.val && right > root.val){
-            return true;
-        }else{
+        if (!isValidBST(root.left)) {
             return false;
         }
-    }
-    public int getVal(TreeNode root, boolean isLeft, int parent) {
-        if (root == null){
-            if (isLeft){
-                return parent - 1;
-            }else{
-                return parent + 1;
-            }
+        if (!firstNode && lastVal >= root.val) {
+            return false;
         }
-        if (root.val == parent){
-            retuen parent;
+        firstNode = false;
+        lastVal = root.val;
+        if (!isValidBST(root.right)) {
+            return false;
         }
-        int left = getVal(root.left, true, root.val);
-        int right = getVal(root.right, false, root.val);
-        if( left < root.val && right > root.val){
-            if (isLeft){
-                return left;
-            }else{
-                return right;
-            }
-        }else{
-            return parent;
-        }
+        return true;
     }
 }
