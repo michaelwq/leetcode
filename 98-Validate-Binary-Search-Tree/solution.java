@@ -12,15 +12,22 @@ public class Solution {
         if (root == null){
             return true;
         }
-        int left = getVal(root.left, root.val);
-        int right = getVal(root.right, root.val);
+        int left = getVal(root.left, true, root.val);
+        int right = getVal(root.right, false, root.val);
         if( left < root.val && right > root.val){
             return true;
         }else{
             return false;
         }
     }
-    public int getVal(TreeNode root, int parent) {
+    public int getVal(TreeNode root, boolean isLeft, int parent) {
+        if (root == null){
+            if (isLeft){
+                return parent - 1;
+            }else{
+                return parent + 1;
+            }
+        }
         int left = root.val - 1;
         int right = root.val + 1;
         if (root.left != null){
