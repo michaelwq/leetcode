@@ -24,10 +24,10 @@ public class Solution {
         int left = root.val - 1;
         int right = root.val + 1;
         if (root.left != null){
-            left = getVal(root.left, true, root.val);
+            left = getVal(root.left, root.val);
         }
         if (root.right != null){
-            right = getVal(root.right, false, root.val);
+            right = getVal(root.right, root.val);
         }
         if( left < root.val && right > root.val){
             return left;
